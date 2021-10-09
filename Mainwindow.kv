@@ -1,0 +1,115 @@
+
+
+<MyImage>:
+    
+
+    
+    Image:
+        id:new_img
+   
+        allow_stretch: True
+        keep_ratio: True
+        source:'temp.png'
+
+
+
+
+
+
+
+
+
+
+<Mywidget>:
+    
+    BoxLayout:
+        orientation:"vertical"
+        size: root.width,root.height
+        GridLayout:
+            cols:2
+            GridLayout:
+                rows:3
+                GridLayout:
+                    cols:2
+                    Button:
+                        id:button1
+                        text:"Load Data"
+                        size_hint:(.35,1) 
+                                     
+                                        
+                    
+                    BoxLayout:
+
+                        MyImage:
+                            id:imageclass
+                            
+                
+                        
+                        
+                GridLayout:
+
+                    cols:3
+                    rows:2
+                    size_hint:(1,.2)
+
+                    Label:
+                        id:windowwidth
+                        text:"window level"
+                        size_hint:(.25,1)
+                    
+                    Slider:
+                        
+                        id:windowwidthslider
+                        orientation:"horizontal"
+                        min:-1000
+                        max:2000
+                        size_hint:(.7,1)
+                        on_value:
+
+                            root.slider_update()
+
+
+
+                    Label:
+                        id:windowwidthlabel
+                        text:"0"
+                        size_hint:(.1,1)
+                    Label:
+                        id:windowlevel
+                        text:"window width"
+                        size_hint:(.25,1)
+                    Slider:
+                        id:windowlevelslider
+                        orientation:"horizontal"
+                        min:-1000
+                        max:2000
+                        size_hint:(.7,1)
+                        on_value:
+
+                            root.slider_update()
+                    Label:
+                        id:windowlevellabel
+                        text:"0"
+                        size_hint:(.03,1)
+
+
+
+
+
+
+
+
+
+
+
+
+            Slider:
+                id:slider1
+                orientation:'vertical'
+                min:1
+                
+                size_hint:(.1,1)
+
+                on_value:
+
+                    root.slider_update()
