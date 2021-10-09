@@ -156,7 +156,7 @@ class Mainwindow(App):
     
     def load_data(self):
         global stack
-        path=r'C:\Users\AJU\OneDrive\Desktop\New folder\DVD RW Drive\DICOM\S539270\S30\New folder'
+        path=r'path to the dicom folder'
         slice=[dm.dcmread(path+'/'+s) for s in os.listdir(path)]
         slice.sort(key=lambda x: float(x.ImagePositionPatient[2]))
         stack=slice
