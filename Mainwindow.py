@@ -11,6 +11,9 @@ from kivy.graphics.transformation import Matrix
 from kivy.uix.scatter import Scatter
 from kivy.properties import ObservableDict
 
+from kivy.uix.screenmanager import ScreenManager, Screen
+
+
 import os 
 import pydicom as dm
 import numpy as np
@@ -30,7 +33,7 @@ current_location=1
 
 
  
-class Mywidget(Widget):
+class Mywidget(Screen):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -65,9 +68,11 @@ class Mywidget(Widget):
 
         image=Dicom_to_image(stack[current_location],WL,WW)
         cv2.imwrite('temp.png',image)
-        
-        self.app.root.ids.imageclass.ids.new_img.source='temp.png'
-        self.app.root.ids.imageclass.ids.new_img.reload()        
+        appinstance= App.get_running_app()
+        appinstance.root.get_screen("Mywidget").ids.imageclass.ids.new_img.source='temp.png'
+        appinstance.root.get_screen("Mywidget").ids.imageclass.ids.new_img.reload()
+      
+        #self.app.root.ids.imageclass.ids.new_img.reload()        
         
         #print(type(self.ids))
         WW=Windowwidth
@@ -138,7 +143,13 @@ class MyImage(BoxLayout):
       
 
                 
+class SettingsScreen(Screen):
+    pass
                 
+
+
+
+
 
 
 
@@ -160,13 +171,19 @@ class Mainwindow(App):
         slice=[dm.dcmread(path+'/'+s) for s in os.listdir(path)]
         slice.sort(key=lambda x: float(x.ImagePositionPatient[2]))
         stack=slice
+      
+        
         
     def build(self):
         self.load_data() 
+        sm = ScreenManager()
+        sm.add_widget(Mywidget(name='Mywidget'))
+        sm.add_widget(SettingsScreen(name='settings'))
+        
+        return sm
+        
         
            
-        return Mywidget()
-
 #subclass
 
 

@@ -21,6 +21,7 @@
 
 
 <Mywidget>:
+    name:"Mywidget"
     
     BoxLayout:
         orientation:"vertical"
@@ -33,8 +34,10 @@
                     cols:2
                     Button:
                         id:button1
-                        text:"Load Data"
+                        text:"Home page"
                         size_hint:(.35,1) 
+                        on_press:
+                            root.manager.current = 'settings'
                                      
                                         
                     
@@ -110,6 +113,14 @@
                 
                 size_hint:(.1,1)
 
-                on_value:
+                on_value:root.slider_update()
 
-                    root.slider_update()
+
+<SettingsScreen>:
+    BoxLayout:
+        Button:
+            text: 'My settings button'
+        Button:
+            text: 'Back to menu'
+            on_press: 
+                root.manager.current = 'Mywidget'
